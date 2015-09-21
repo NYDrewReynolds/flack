@@ -104,4 +104,25 @@ RSpec.describe User, type: :model do
       expect(invalid_user).not_to be_valid
     end
   end
+  
+  context "when responding to other tables" do
+
+    let(:valid_attributes) { { name: "Johnny Appleseed",
+                               screen_name: "jappleseed",
+                               uid: 1,
+                               oauth_token: "12345",
+                               oauth_token_secret: "abcde" } }
+    
+    it "responds to messages" do
+      user = User.create(valid_attributes)
+      
+      expect(user).to respond_to(:messages)
+    end
+    
+    it "responds to rooms" do
+      user = User.create(valid_attributes)
+      
+      expect(user).to respond_to(:messages)
+    end
+  end
 end
