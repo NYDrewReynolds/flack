@@ -107,22 +107,19 @@ RSpec.describe User, type: :model do
   
   context "when responding to other tables" do
 
-    let(:valid_attributes) { { name: "Johnny Appleseed",
-                               screen_name: "jappleseed",
-                               uid: 1,
-                               oauth_token: "12345",
-                               oauth_token_secret: "abcde" } }
+    let(:valid_user) { User.create(name: "Johnny Appleseed",
+                                   screen_name: "jappleseed",
+                                   uid: 1,
+                                   oauth_token: "12345",
+                                   oauth_token_secret: "abcde") }
+    before(:each) { valid_user }
     
     it "responds to messages" do
-      user = User.create(valid_attributes)
-      
-      expect(user).to respond_to(:messages)
+      expect(valid_user).to respond_to(:messages)
     end
     
     it "responds to rooms" do
-      user = User.create(valid_attributes)
-      
-      expect(user).to respond_to(:messages)
+      expect(valid_user).to respond_to(:messages)
     end
   end
 end
