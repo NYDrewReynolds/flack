@@ -1,1 +1,11 @@
 <h1><%= @room.name %></h1>
+
+<%= form_tag messages_path, remote: true do %>
+
+    <%= label_tag :message %>
+    <%= text_field_tag :body %>
+
+    <%= submit_tag "Send", class: "btn btn-large btn-primary" %>
+<% end %>
+
+<div id="messages"></div>
