@@ -6,8 +6,10 @@ jQuery(document).ready(function ($) {
 
     $('.btn').on('click', function (event) {
         event.preventDefault();
+        var $formBody = $('#body');
         var messageParams = {
-                body: $('#body').val()
+                body: $formBody.val(),
+                room_id: $formBody.data('id')
         };
 
         $.ajax({
