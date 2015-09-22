@@ -1,0 +1,28 @@
+jQuery(document).ready(function ($) {
+
+    var addMessage = function (message) {
+        $('#messages').append("<p class='message'>" + message + "</p>");
+    };
+
+    $('.btn').on('click', function (event) {
+        event.preventDefault();
+        var $formBody = $('#body');
+        var messageParams = {
+                body: $formBody.val(),
+                room_id: $formBody.data('id')
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/messages.json',
+            data: messageParams,
+            success: function (newMessage) {
+                addMessage(newMessage.body);
+            },
+            error: function (xhr) {
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+            }
+        })
+    });
+});
