@@ -10,6 +10,6 @@ class MessagesController < ApplicationController
       format.js { render json: {success: true} }
       format.json { render json: {success: true, body: params[:body]} }
     end
-    REDIS.publish(room.name, message_body)
+    REDIS.publish("flack:#{room.name}", message_body)
   end
 end
