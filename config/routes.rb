@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   resources :rooms, only: [:index, :show]
-  resources :users
+  resources :users, only: [:new, :create]
   resources :messages
   
   get '/login', to: 'sessions#new'
