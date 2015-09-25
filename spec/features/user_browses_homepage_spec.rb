@@ -35,6 +35,12 @@ RSpec.describe "user", type: :feature do
       expect(current_path).to eq(rooms_path)
     end
     
+    it "shows the user a logout link after authentication" do
+      login
+      
+      expect(page).to have_link("Logout")
+    end
+    
     it "creates an actual user" do
       user_count = User.count
       
