@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(strong_user_params)
     if @user.save
       flash[:message] = "Welcome, #{@user.name}"
+      session[:user_id] = @user.id
       @user = current_user
       redirect_to rooms_path
     else
