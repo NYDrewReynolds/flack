@@ -5,9 +5,7 @@ RSpec.describe User, type: :model do
     
     let(:valid_attributes) { { name: "Johnny Appleseed",
                                screen_name: "jappleseed",
-                               uid: 1,
-                               oauth_token: "12345",
-                               oauth_token_secret: "abcde" } }
+                               password: "password" } }
     
     it "is valid" do
       user = User.create(valid_attributes)
@@ -44,64 +42,11 @@ RSpec.describe User, type: :model do
       expect(invalid_user).not_to be_valid
     end
     
-    it "is invalid without a uid" do
+    it "is invalid without a password" do
       user = User.create(name: "Johnny Appleseed",
-                         screen_name: "jappleseed",
-                         oauth_token: "12345",
-                         oauth_token_secret: "abcde")
+                         screen_name: "jappleseed")
       
       expect(user).not_to be_valid
-    end
-    
-    it "is invalid unless uid is unique" do
-      user = User.create(valid_attributes)
-      invalid_user = User.create(name: "Johnny Bananaseed",
-                                 screen_name: "jbananaseed",
-                                 uid: 1,
-                                 oauth_token: "1234567890",
-                                 oauth_token_secret: "abcdefghij")
-      
-      expect(invalid_user).not_to be_valid
-    end
-    
-    it "is invalid without an oauth token" do
-      user = User.create(name: "Johnny Appleseed",
-                         screen_name: "jappleseed",
-                         uid: 1,
-                         oauth_token_secret: "abcde")
-      
-      expect(user).not_to be_valid
-    end
-    
-    it "is invalid unless the oauth_token is unique" do
-      user = User.create(valid_attributes)
-      invalid_user = User.create(name: "Johnny Bananaseed",
-                                 screen_name: "jbananaseed",
-                                 uid: 2,
-                                 oauth_token: "12345",
-                                 oauth_token_secret: "abcdefghij")
-      
-      expect(invalid_user).not_to be_valid
-    end
-    
-    it "is invalid without an oauth_token_secret" do
-      user = User.create(name: "Johnny Appleseed",
-                         screen_name: "jappleseed",
-                         uid: 1,
-                         oauth_token: "12345")
-      
-      expect(user).not_to be_valid
-    end
-    
-    it "is invalid unless oauth_token_secret is unique" do
-      user = User.create(valid_attributes)
-      invalid_user = User.create(name: "Johnny Bananaseed",
-                                 screen_name: "jbananaseed",
-                                 uid: 2,
-                                 oauth_token: "1234567890",
-                                 oauth_token_secret: "abcde")
-      
-      expect(invalid_user).not_to be_valid
     end
   end
   

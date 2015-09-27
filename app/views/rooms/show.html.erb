@@ -3,7 +3,7 @@
 <%= form_tag messages_path, remote: true do %>
 
     <%= label_tag :message %>
-    <%= text_field_tag :body, nil, :data => {id: @room.id} %>
+    <%= text_field_tag :message, nil, :data => {id: @room.id} %>
 
     <%= submit_tag "Send", class: "btn btn-large btn-primary" %>
 <% end %>

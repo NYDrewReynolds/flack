@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  root 'rooms#index'
-  resources :rooms
-  resources :users
+  root 'welcome#index'
+  resources :rooms, only: [:index, :show]
+  resources :users, only: [:new, :create]
   resources :messages
+  
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 
   namespace :api do
     namespace :v1 do
