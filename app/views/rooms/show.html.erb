@@ -3,13 +3,13 @@
 <%= form_tag messages_path, remote: true do %>
 
     <%= label_tag :message %>
-    <%= text_field_tag :message, nil, :data => {id: @room.id} %>
+    <%= text_field_tag :message, nil, :data => {room_id: @room.id, user_id: current_user.id} %>
 
     <%= submit_tag "Send", class: "btn btn-large btn-primary" %>
 <% end %>
 
 <ul id="messages">
   <% @room.messages.each do |message| %>
-      <li><%= message.body %></li>
+      <li><%= message.user.screen_name %>: <%= message.body %></li>
   <% end %>
 </ul>

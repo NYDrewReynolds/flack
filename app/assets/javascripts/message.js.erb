@@ -1,15 +1,16 @@
 jQuery(document).ready(function ($) {
 
-    var addMessage = function (message) {
-        $('#messages').append("<li class='message'>" + message + "</li>");
+    var addMessage = function (message, screenName) {
+        $('#messages').append("<li class='message'>" + screenName + ": " + message + "</li>");
     };
 
     $('.btn').on('click', function (event) {
         event.preventDefault();
-        var $formBody = $('#body');
+        var $formBody = $('#message');
         var messageParams = {
                 body: $formBody.val(),
-                room_id: $formBody.data('id')
+                room_id: $formBody.data().roomId,
+                user_id: $formBody.data().userId
         };
 
         $.ajax({
@@ -17,7 +18,9 @@ jQuery(document).ready(function ($) {
             url: '/messages.json',
             data: messageParams,
             success: function (newMessage) {
-                addMessage(newMessage.body);
+                var body = newMessage.body;
+                var screenName = newMessage.screen_name;
+                addMessage(body, screenName);
             },
             error: function (xhr) {
                 console.log(xhr.status);
