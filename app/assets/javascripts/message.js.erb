@@ -15,6 +15,7 @@ function createMessage() {
 
         $.post('/messages', {message: messageParams}).success(function (message) {
             appendMessage(message);
+            $('#message').val("");
         });
     });
 }
