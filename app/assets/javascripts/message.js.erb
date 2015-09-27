@@ -1,42 +1,24 @@
-jQuery(document).ready(function ($) {
+$(document).ready(function () {
+    createMessage();
+    appendMessage();
+});
 
-    var addMessage = function (message, screenName) {
-        $('#messages').append("<li class='message'>" + screenName + ": " + message + "</li>");
-    };
-
+function createMessage() {
     $('.btn').on('click', function (event) {
         event.preventDefault();
         var $formBody = $('#message');
         var messageParams = {
-                body: $formBody.val(),
-                room_id: $formBody.data().roomId,
-                user_id: $formBody.data().userId
+            body: $formBody.val(),
+            room_id: $formBody.data().roomId,
+            user_id: $formBody.data().userId
         };
 
-        $.ajax({
-            type: 'POST',
-            url: '/messages.json',
-            data: messageParams,
-            success: function (newMessage) {
-                var body = newMessage.body;
-                var screenName = newMessage.screen_name;
-                addMessage(body, screenName);
-            },
-            error: function (xhr) {
-                console.log(xhr.status);
-                console.log(xhr.responseText);
-            }
-        })
+        $.post('/messages', {message: messageParams}).success(function (message) {
+            appendMessage(message);
+        });
     });
+}
 
-
-    var height = 0;
-    $('ul li').each(function (i, value) {
-        height += parseInt($(this).height());
-    });
-
-    height += '';
-
-    $('ul').animate({scrollTop: height});
-
-});
+function appendMessage(message) {
+    $('#messages').append(message)
+}
