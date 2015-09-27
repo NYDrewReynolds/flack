@@ -20,7 +20,7 @@
             <%= form_tag messages_path, remote: true do %>
 
                 <%= text_field_tag :message, nil, :placeholder => "Type your message here...", class: "form-control input-sm", :data => {room_id: @room.id, user_id: current_user.id} %>
-                <%= submit_tag "Send", class: "btn btn-warning btn-sm" %>
+                <%= submit_tag "Send", class: "btn btn-warning btn-sm", id: "message-send-button" %>
             <% end %>
 
           </div>

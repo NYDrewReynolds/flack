@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
     else
       flash.now[:errors] = "Invalid message!"
     end
-    REDIS.publish("flack:#{message.room.name}", message.body)
+    REDIS.publish("rock", message.body.to_json)
   end
 
   private
