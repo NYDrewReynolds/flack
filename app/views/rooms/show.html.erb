@@ -10,22 +10,7 @@
         <div class="panel-body">
           <ul class="chat" id="messages">
             <% @room.messages.each do |message| %>
-                <li class="left clearfix"><span class="chat-img pull-left">
-                  <img src="http://placehold.it/50/55C1E7/fff&text=<%= message.user.screen_name.first %>" alt="User Avatar" class="img-circle"/>
-                        </span>
-
-                  <div class="chat-body clearfix">
-                    <div class="header">
-                      <strong class="primary-font"><%= message.user.screen_name %></strong>
-                      <small class="pull-right text-muted">
-                        <%= time_ago_in_words(message.created_at) %> ago
-                      </small>
-                    </div>
-                    <p>
-                      <%= message.body %>
-                    </p>
-                  </div>
-                </li>
+                <%= render partial: 'shared/message', locals: {message: message} %>
             <% end %>
           </ul>
         </div>
