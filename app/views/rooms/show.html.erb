@@ -1,15 +1,46 @@
-<h1><%= @room.name %></h1>
+<div class="container">
+  <h1 class="'text-center"><%= @room.name %></h1>
 
-<%= form_tag messages_path, remote: true do %>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <%= @room.name %> Chat
+        </div>
+        <div class="panel-body">
+          <ul class="chat" id="messages">
+            <% @room.messages.each do |message| %>
+                <li class="left clearfix"><span class="chat-img pull-left">
+                  <img src="http://placehold.it/50/55C1E7/fff&text=<%= message.user.screen_name.first %>" alt="User Avatar" class="img-circle"/>
+                        </span>
 
-    <%= label_tag :message %>
-    <%= text_field_tag :message, nil, :data => {room_id: @room.id, user_id: current_user.id} %>
+                  <div class="chat-body clearfix">
+                    <div class="header">
+                      <strong class="primary-font"><%= message.user.screen_name %></strong>
+                      <small class="pull-right text-muted">
+                        <%= time_ago_in_words(message.created_at) %> ago
+                      </small>
+                    </div>
+                    <p>
+                      <%= message.body %>
+                    </p>
+                  </div>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="panel-footer">
+          <div class="input-group form-inline">
 
-    <%= submit_tag "Send", class: "btn btn-large btn-primary" %>
-<% end %>
+            <%= form_tag messages_path, remote: true do %>
 
-<ul id="messages">
-  <% @room.messages.each do |message| %>
-      <li><%= message.user.screen_name %>: <%= message.body %></li>
-  <% end %>
-</ul>
+                <%= text_field_tag :message, nil, :placeholder => "Type your message here...", class: "form-control input-sm", :data => {room_id: @room.id, user_id: current_user.id} %>
+                <%= submit_tag "Send", class: "btn btn-warning btn-sm" %>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

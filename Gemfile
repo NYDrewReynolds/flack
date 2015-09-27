@@ -12,6 +12,7 @@ gem 'rails_12factor', group: :production
 gem 'redis'
 gem 'socket.io-rails'
 gem 'bcrypt'
+gem 'twitter-bootstrap-rails', '~> 3.2.0'
 
 group :development, :test do
   gem 'capybara'
