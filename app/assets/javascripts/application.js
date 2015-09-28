@@ -15,5 +15,3 @@
 //= require socket.io
 //= require twitter/bootstrap
 //= require_tree .
-
-var socket = io("localhost:8080");
