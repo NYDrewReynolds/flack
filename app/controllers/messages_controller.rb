@@ -8,11 +8,12 @@ class MessagesController < ApplicationController
     else
       flash.now[:errors] = "Invalid message!"
     end
-    REDIS.publish("rock", message.body.to_json)
+    rendered_message = MessageRenderer.new(message).render_partial
+    REDIS.publish("rock", rendered_message)
   end
 
   private
-
+  
   def message_params
     params.require(:message).permit(:user_id, :room_id, :body)
   end
