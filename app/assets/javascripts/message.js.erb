@@ -14,12 +14,7 @@ function createMessage() {
         };
 
         $.post('/messages', {message: messageParams}).success(function (message) {
-            appendMessage(message);
             $('#message').val("");
         });
     });
-}
-
-function appendMessage(message) {
-    $('#messages').append(message)
 }
