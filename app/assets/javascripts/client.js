@@ -10,5 +10,7 @@ $(document).ready(function() {
   socket.on("message", function(message) {
     console.log(message);
     $('#messages').append(message);
+    var $chatBox = $(".panel-body");
+    $chatBox.animate({scrollTop: $chatBox[0].scrollHeight}, 1000);
   });
 });

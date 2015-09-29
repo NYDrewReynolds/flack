@@ -1,6 +1,12 @@
 $(document).ready(function () {
+    initialScroll();
     createMessage();
 });
+
+function initialScroll() {
+    var $chatBox = $(".panel-body");
+    $chatBox.animate({scrollTop: $chatBox[0].scrollHeight}, 1000);
+}
 
 function createMessage() {
     $('.btn').on('click', function (event) {
