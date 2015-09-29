@@ -9,7 +9,7 @@ class MessagesController < ApplicationController
       flash.now[:errors] = "Invalid message!"
     end
     rendered_message = MessageRenderer.new(message).render_partial
-    REDIS.publish("rock", rendered_message)
+    REDIS.publish("flack:#{message.room.name}", rendered_message)
   end
 
   private
