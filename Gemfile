@@ -14,6 +14,7 @@ gem 'socket.io-rails'
 gem 'bcrypt'
 gem 'twitter-bootstrap-rails', '~> 3.2.0'
 gem 'render_anywhere', :require => false
+gem 'figaro'
 
 group :development, :test do
   gem 'capybara'
